@@ -91,11 +91,22 @@ function startGame() {
 
     // Funzione che stampa il messaggio di vincita o di perdita dell'utente
     function endGame(winOrLose) {
+        let message;
         if(winOrLose === 'win') {
-            alert('Hai vinto!');
+            message = 'HAI VINTO!'
         } else {
-            alert('Hai perso! Hai fatto ' + rightAttemptsArray.length + ' tentativi.');
+            message = 'Hai perso! Hai fatto ' + rightAttemptsArray.length + ' tentativi.';
+
+            // Rendo tutti i quadrati non più cliccabili
+            const allClickedNumbers = document.getElementsByClassName('square');
+            for (let i = 0; i < allClickedNumbers.length; i++) {
+                const thisClickedNumbers = allClickedNumbers[i];
+                thisClickedNumbers.style.pointerEvents = "none";
+            }
         }
+
+        document.getElementById('message').innerHTML = message;
+        document.getElementById('message').classList.remove('hidden');
     }
 }
 
