@@ -15,8 +15,9 @@ function startGame() {
     const mainGrid = document.getElementById('grid');
     mainGrid.classList.remove('hidden');
 
-    // Ogni volta che parte il gioco, pulisce la griglia
+    // Ogni volta che parte il gioco, pulisce la griglia e il messaggio
     mainGrid.innerHTML = "";
+    document.getElementById('message').innerHTML = '';
 
     // Prendo il valore della difficoltà del livello che ci tornano utili per stabilire quanti squares ci sono per ogni livello
     let difficulty = document.getElementById('difficulty').value;
