@@ -34,6 +34,8 @@ function startGame() {
         numberOfSquares = 49;
     }
 
+    // Generare le bombe
+    const bombArray = [];
 
     // Per ogni numero inserisco uno square col numero ordinale
     for(let i = 1; i <= numberOfSquares; i++) {
@@ -63,3 +65,53 @@ function startGame() {
 }
 
 
+// --------
+// FUNCTIONS
+// --------
+
+// Funzione ritorna un numero (16) di bombe compreso tra 1 e numberOfSquares, random
+function generateBombs(maxRangeNumber, numberOfBombs) {
+    
+    // Dichiaro l'array che conterrà il numero di bombe (16)
+    const arrayOfBombs = [];
+
+    // Finchè l'array che contiene le bombe non è lungo quanto il numero di bombe, aggiunge numeri random all'array
+    while (arrayOfBombs.length < numberOfBombs) {
+        const randomNumber = getRndInteger(1, maxRangeNumber);
+
+        // Se il numero random generato non è incluso nell'array, viene pushato
+        if (!arrayOfBombs.includes(randomNumber)) {
+            arrayOfBombs.push(randomNumber);
+        }
+    }
+
+    // Ritorna il numero di bombe con numero random
+    return arrayOfBombs;
+}
+
+
+
+
+
+
+
+
+
+
+
+// Funziona che ritorna un numero random
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+
+// --------
+// INDICE
+// --------
+
+// difficulty = variabile col .value del livello scelto dall'utente
+// game-grid = classe della griglia di gioco
+// grid = id della griglia di gioco
+// newSquares = costante che contiene il div con all'interno lo span col numero ordinale
+// numberOfSquare = numero dei quadrati (in base al livello di difficoltà)
+// playButton = costante che seleziona il pulsante play
