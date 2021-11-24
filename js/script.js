@@ -105,6 +105,7 @@ function startGame() {
             }
         }
 
+        // Stampo il messaggio con l'esito del gioco nel DOM
         document.getElementById('message').innerHTML = message;
         document.getElementById('message').classList.remove('hidden');
     }
