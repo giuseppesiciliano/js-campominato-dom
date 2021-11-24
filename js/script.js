@@ -68,7 +68,7 @@ function startGame() {
             if(bombsArray.includes(clickedNumber)) {
                 this.classList.add('bomb');
                 endGame('lose');
-            }else {
+            } else{
                 this.classList.add('active');
                 this.style.pointerEvents = "none";
                 rightAttemptsArray.push(clickedNumber);
@@ -80,17 +80,22 @@ function startGame() {
         })
 
         // If per modificare la grandezza dei quadrati (che occupano l'intera griglia) a seconda del numero dei quadrati presenti
-        if(numberOfSquares === 100){
+        if (numberOfSquares === 100){
             newSquare.classList.add('easy');
-        }else if(numberOfSquares === 81){
+        } else if(numberOfSquares === 81){
             newSquare.classList.add('hard');
-        }else if(numberOfSquares === 49){
+        } else if(numberOfSquares === 49){
             newSquare.classList.add('crazy');
         }
     }
 
+    // Funzione che stampa il messaggio di vincita o di perdita dell'utente
     function endGame(winOrLose) {
-        
+        if(winOrLose === 'win') {
+            alert('Hai vinto!');
+        } else {
+            alert('Hai perso! Hai fatto ' + rightAttemptsArray.length + ' tentativi.');
+        }
     }
 }
 
