@@ -34,8 +34,21 @@ function startGame() {
         numberOfSquares = 49;
     }
 
+
+
+
+
     // Generare le bombe
-    const bombArray = [];
+    const bombsAmount = 16;
+    const bombsArray = generateBombs(numberOfSquares, bombsAmount);
+
+    // Calcolare il numero massimo dei tentativi per determinare la vincita della partita
+    const maxAttempts = numberOfSquares - bombsArray.length;
+
+    // Creare un'array col numero dei quadrati non-bombe
+    const rightAttemptsArray = []
+
+
 
     // Per ogni numero inserisco uno square col numero ordinale
     for(let i = 1; i <= numberOfSquares; i++) {
@@ -50,7 +63,20 @@ function startGame() {
 
         // Quando clicco su newSquare (al div che rappresenta il quadrato) aggiungo la classe 'active'
         newSquare.addEventListener('click', function() {
-            this.classList.add('active');
+            
+            const clickedNumber = parseInt(this.querySelector('span').textContent);
+            if(bombsArray.includes(clickedNumber)) {
+                this.classList.add('bomb');
+                endGame('lose');
+            }else {
+                this.classList.add('active');
+                this.style.pointerEvents = "none";
+                rightAttemptsArray.push(clickedNumber);
+
+                if(rightAttemptsArray.length >= maxAttempts) {
+                    endGame('win');
+                }
+            }
         })
 
         // If per modificare la grandezza dei quadrati (che occupano l'intera griglia) a seconda del numero dei quadrati presenti
@@ -61,6 +87,10 @@ function startGame() {
         }else if(numberOfSquares === 49){
             newSquare.classList.add('crazy');
         }
+    }
+
+    function endGame(winOrLose) {
+        
     }
 }
 
@@ -90,25 +120,20 @@ function generateBombs(maxRangeNumber, numberOfBombs) {
 }
 
 
-
-
-
-
-
-
-
-
-
 // Funziona che ritorna un numero random
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
 
+
+
 // --------
 // INDICE
 // --------
 
+// bombsAmount = numero complessivo di bombe presenti nel gioco
+// bombsArray = array contenente il numero di bombe con numeri random
 // difficulty = variabile col .value del livello scelto dall'utente
 // game-grid = classe della griglia di gioco
 // grid = id della griglia di gioco
